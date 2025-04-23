@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>User Profile Manager</h1>
+    <button id="adduser">Add New User</button>
+    <button id="showusers">Show Users</button>
+    <button id="clearusers">Clear users</button>
+    <div id="userList"></div>
+    <script>
+        let users=[];
+        let userId=1;
+        const adduser=document.getElementById("adduser");
+        const showusers=document.getElementById("showusers")
+        const clearusers=document.getElementById("clearusers");
+        const userlist=document.getElementById("userList");
+        adduser.addEventListener("click",()=>{
+            const name=prompt("Enter user name:").trim().toUpperCase();
+            const email=prompt("Enter user email:").trim().toLowerCase();
+            if(!name||!email||!email.includes("@")){
+                alert("Invalid input!please try again");
+                return;
+            }
+        else{
+        const newUser={
+            id:userId++,
+            name:name,
+            email:email
+        };
+        users.push(newUser);
+        alert("user added Successfully");
+    }
+     
+    })
+    showusers.addEventListener("click",()=>{
+        console.log('users:',users);
+        displayUsers()
+
+    })
+clearusers.addEventListener("click",()=>{
+    users=[]
+    userId=1;
+    alert("all users cleaned");
+    console.log("users:",users)
+})
+function displayUsers() {
+    if (users.length === 0) {
+        userlist.innerText = 'No users found.';
+    } else {
+        userlist.innerHTML = users.map(user =>
+            `${user.id}. ${user.name} (${user.email})`
+        ).join('<br>');
+    }
+}
+
+    </script>
+</body>
+</html>
